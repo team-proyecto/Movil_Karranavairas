@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Departamentos {
 
-    private int id;
+    private Long id;
     private String nombreDepartamento;
     private List<Provincias> provincia;
     private boolean estado;
@@ -15,11 +15,11 @@ public class Departamentos {
         this.provincia = new ArrayList<>();
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

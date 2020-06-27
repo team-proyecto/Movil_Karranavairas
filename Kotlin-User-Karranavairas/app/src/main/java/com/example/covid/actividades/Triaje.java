@@ -59,42 +59,59 @@ public class Triaje extends AppCompatActivity  {
 
                 //Traer Id de UsuarioCaso de memoria
                 ClaseGlobal objLecturaGLobal = (ClaseGlobal) getApplicationContext();
-                Long idUsuarioCaso = objLecturaGLobal.getId();
+                //Long idUsuarioCaso = objLecturaGLobal.getId();
                 //Long idReporteMedico = Long.valueOf(objLecturaGLobal.getReporteMedico().getId());
-                Log.i(TAG, "id en la clase global : " + idUsuarioCaso);
+                Log.i(TAG, "id en la clase global : " + objLecturaGLobal.getId());
 
 
-                if((objLecturaGLobal.getReporteEconomico()==null)){
+                if(objLecturaGLobal.getReporteMedico() == null){
+                    Log.i(TAG, "No guardo reporte medico en la memoria");
+                    Log.i(TAG, "No guardo reporte medico en la memoria" + objLecturaGLobal.getReporteEconomico());
                     //crear nuevo reporte medico
                     ReporteMedico obj = new ReporteMedico();
                     obj.setResultadoTriaje(sintomas);
                     obj.setEstado(true);
-                    if(!(sintomas)){
-                        obj.getEstadoMedico().setId(1);
+                    EstadoMedico estadoMedico = new EstadoMedico();
+                    obj.setEstadoMedico(estadoMedico);
+                    obj.getEstadoMedico().setId(1);
+                    if((sintomas)){
+                        obj.getEstadoMedico().setId(2);
                     }
-                    //UsuarioCasos objUsu = new UsuarioCasos();
-                    //objUsu.setId(idUsuarioCaso);
-                    //obj.setUsuarioCasos(objLecturaGLobal.getUsuarioCasos());
-                    //obj.getUsuarioCasos().setId(idUsuarioCaso);
-
 
                     //Log.i(TAG, "UsuarioCaso a insertar en ReporteMedico : " + obj.getUsuarioCasos().getId());
                     registrarReporteMedico(obj);
-                    Log.i(TAG, "Se registro reporte con el siguiente ID ");
-                    //actualizar nuevo reporte medico en usaurio casos de memoria
 
-                    updateUsuariosCaso(objLecturaGLobal.getId());
+                    //actualizar nuevo reporte medico en usaurio casos de memoria
 
                     Log.i(TAG, "Se actualizo ReporteMedico en usuario caso de ClaseGlobal ");
 
                     Intent intent = new Intent(getApplicationContext(), FichaPersonal.class);
                     startActivity(intent);
                 }else{
+                    Log.i(TAG, "Si guardo reporte medico en la memoria");
                     //actualizar el reporte Medico
 
+                    if(objLecturaGLobal.getReporteMedico().getEstadoMedico().getId()==1){
+                        ReporteMedico obj = new ReporteMedico();
+                        obj.setResultadoTriaje(sintomas);
+                        EstadoMedico estadoMedico = new EstadoMedico();
+                        obj.setEstadoMedico(estadoMedico);
+                        obj.getEstadoMedico().setId(1);
+                        if((sintomas)){
+                            obj.getEstadoMedico().setId(2);
+                        }
+                        actualizarReporteMedico(objLecturaGLobal.getId(),obj);
 
-                    Intent intent = new Intent(getApplicationContext(), Menu.class);
-                    startActivity(intent);
+                        Intent intent = new Intent(getApplicationContext(), Menu.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        Intent intent = new Intent(getApplicationContext(), Menu.class);
+                        startActivity(intent);
+                    }
+
+
+
                 }
 
             }
@@ -131,7 +148,7 @@ public class Triaje extends AppCompatActivity  {
             public void onResponse(Call<ReporteMedico> call, Response<ReporteMedico> response) {
                 Log.i(TAG, "PASO 0_crearreportemedico: " + response);
                 if (!response.isSuccessful()){
-                    Log.i(TAG, "Algo salio mal" + response.body().getMensaje());
+                    Log.i(TAG, "Algo salio mal" + response.body());
                 }else{
 
                     ReporteMedico res = response.body();
@@ -143,8 +160,13 @@ public class Triaje extends AppCompatActivity  {
                     ClaseGlobal objGlobal = (ClaseGlobal) getApplicationContext();
                     objGlobal.setReporteMedico(res.getReporteMedico());
 
+                    //problema con fecha
+                    //objGlobal.getReporteMedico().setFechaRegistro(null);
+
 
                     Log.i(TAG, "id-objGLobal-reporteMedico: " + objGlobal.getReporteMedico().getId());
+
+                    actualizarUsuarioCasos(objGlobal.getId(),objGlobal.getUsuarioCasos());
                 }
             }
 
@@ -156,129 +178,17 @@ public class Triaje extends AppCompatActivity  {
         });
     }
 
-    //se actualizará el UsuarioCaso en memoria con el ReporteMedico creado
-
-    public void updateUsuariosCaso(Long id) {
-
-        ProyectoService postService = ConnectionRest.getConnection().create(ProyectoService.class);
-
-        Call<UsuarioCasos> call = postService.obtenerUsuariosCaso(id);
-
-        call.enqueue(new Callback<UsuarioCasos>() {
-            @Override
-            public void onResponse(Call<UsuarioCasos> call, Response<UsuarioCasos> response) {
-                //UsuarioCasos usuarioOriginal;
-                if (response.isSuccessful()) {
-                    /*SimpleDateFormat fecha= new SimpleDateFormat("yyyy-MM-dd");
-                    String sFecha = fecha.format(fecha);
-                    Date dat=new Date();*/
-                    try {
-
-                        final UsuarioCasos com = response.body(); // Esto es json completo
-
-
-                        UsuarioCasos reg = new UsuarioCasos();
-
-                        reg.setId(com.getId());
-                        reg.setNombre(com.getNombre());
-                        reg.setApellidos(com.getApellidos());
-                        Nacionalidad nacional = new Nacionalidad();
-                        if(!(com.getNacionalidad() == null)){
-                            nacional.setId(com.getNacionalidad().getId());
-                            reg.setNacionalidad(nacional);
-                            Log.i(TAG, "getNacionalidad: " + reg.getNacionalidad().getId());
-                        }
-                        TipoDocumento documento = new TipoDocumento();
-                        if(!(com.getTipoDocumento() == null)) {
-                            documento.setId(com.getTipoDocumento().getId());
-                            reg.setTipoDocumento(documento);
-                            Log.i(TAG, "getTipoDocumento: " + reg.getTipoDocumento().getId());
-                        }
-                        reg.setNumeroDocumento(com.getNumeroDocumento());
-                        //reg.setFechaNacimiento(com.getFechaNacimiento());
-                        //Log.i(TAG, "fechanacimiento: " + dat);
-                        Distritos dist = new Distritos();
-                        if(!(com.getDistritos() == null)) {
-                            dist.setId(com.getDistritos().getId());
-                            reg.setDistritos(dist);
-                            Log.i(TAG, "getDistritos: " + reg.getDistritos().getId());
-                        }
-                        reg.setTelefono(com.getTelefono());
-                        reg.setDireccionDomicilio(com.getDireccionDomicilio());
-                        reg.setCodigoConfirmacion(com.getCodigoConfirmacion());
-                        reg.setCondicionUso(com.getCondicionUso());
-                        //reg.setFechaRegistro(com.getFechaRegistro());
-                        //Log.i(TAG, "fecharegistro: " + dat;
-                        Gps gps = new Gps();
-                        if(!(com.getGps() == null)) {
-                            gps.setId(com.getGps().getId());
-                            reg.setGps(gps);
-                            Log.i(TAG, "getGps: " + reg.getGps().getId());
-                        }
-                        TipoUsuario tipoUsuario = new TipoUsuario();
-                        if(!(com.getTipoUsuario() == null)) {
-                            tipoUsuario.setId(com.getTipoUsuario().getId());
-                            reg.setTipoUsuario(tipoUsuario);
-                            Log.i(TAG, "getTipoUsuario: " + reg.getTipoUsuario().getId());
-                        }
-                        ReporteEconomico reporteEconomico = new ReporteEconomico();
-                        if(!(com.getReporteEconomico() == null)) {
-                            reporteEconomico.setId(com.getReporteEconomico().getId());
-                            reg.setReporteEconomico(reporteEconomico);
-                            Log.i(TAG, "getReporteEconomico: " + reg.getReporteEconomico().getId());
-                        }
-                        ReporteMedico reporteMedico = new ReporteMedico();
-                        if(!(com.getReporteMedico() == null)) {
-                            reporteMedico.setId(com.getReporteMedico().getId());
-                            reg.setReporteMedico(reporteMedico);
-                            Log.i(TAG, "getReporteMedico: " + reg.getReporteMedico().getId());
-                        }
-                        reg.setEstado(com.getEstado());
-
-
-                        Log.i(TAG, "getId: " + reg.getId());
-                        Log.i(TAG, "getNombre: " + reg.getNombre());
-                        Log.i(TAG, "getApellidos: " + reg.getApellidos());
-                        Log.i(TAG, "getNumeroDocumento: " + reg.getNumeroDocumento());
-                        Log.i(TAG, "getFechaNacimiento: " + reg.getFechaNacimiento());
-                        Log.i(TAG, "getTelefono: " + reg.getTelefono());
-                        Log.i(TAG, "getDireccionDomicilio: " + reg.getDireccionDomicilio());
-                        Log.i(TAG, "getCodigoConfirmacion: " + reg.getCodigoConfirmacion());
-                        Log.i(TAG, "getCondicionUso: " + reg.getCondicionUso());
-                        Log.i(TAG, "getFechaRegistro: " + reg.getFechaRegistro());
-                        Log.i(TAG, "getEstado: " + reg.getEstado());
-
-                        Log.i(TAG, "idpara actualizar: " + Long.valueOf(reg.getId()));
-
-                        actualizarUsuarioCasos(Long.valueOf(reg.getId()),reg);
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                } else {
-                    Log.i("Base", "El metodo ha fallado" + response.errorBody());
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<UsuarioCasos> call, Throwable t) {
-
-            }
-
-        });
-
-
-    }
-
 
     private void actualizarUsuarioCasos(Long id, UsuarioCasos obj){
 
         //se actualiza los campos necesarios
         ClaseGlobal objGlobal = (ClaseGlobal) getApplicationContext();
         obj.setReporteMedico(objGlobal.getReporteMedico());
+        obj.setFechaRegistro(null);
+
+
         Log.i(TAG, "valor  de id de reporte Médico actualizado: " +  obj.getReporteMedico().getId());
+        Log.i(TAG, "valor  de id de usuariocaso a actualizar: " +  id);
 
         Log.i(TAG, "PASO 0_actualizarusuarioscasos: " + obj);
         postService = ConnectionRest.getConnection().create(ProyectoService.class);
@@ -289,10 +199,12 @@ public class Triaje extends AppCompatActivity  {
             public void onResponse(Call<UsuarioCasos> call, Response<UsuarioCasos> response) {
                 Log.i(TAG, "PASO 0_actualizarusuarioscasos: " + response);
                 Log.i(TAG, "PASO 1_actualizarusuarioscasos: " + response.body());
+                Log.i(TAG, "PASO 1_actualizarusuarioscasos: " + response.body().getUsuarioCaso());
+                Log.i(TAG, "PASO 1_actualizarusuarioscasos: " + response.body().getMensaje());
                 if (!response.isSuccessful()){
-                    Log.i(TAG, "Algo salio mal" + response.body().toString());
+                    Log.i(TAG, "Algo salio mal" + response.body().getMensaje());
                 }else{
-                    Log.i(TAG, "Put Subido al API : " + response.body().toString());
+                    Log.i(TAG, "Put Subido al API : " + response.body().getMensaje());
                     Log.i(TAG, "Nuevo Usuario Caso : " + response.body().getUsuarioCaso());
                     Log.i(TAG, "Mensaje de Response : " + response.body().getMensaje());
                 }
@@ -305,6 +217,47 @@ public class Triaje extends AppCompatActivity  {
             }
         });
     }
+
+    private void actualizarReporteMedico(Long id, ReporteMedico obj){
+
+        //se actualiza los campos necesarios
+        /*ClaseGlobal objGlobal = (ClaseGlobal) getApplicationContext();
+        obj.setReporteMedico(objGlobal.getReporteMedico());
+        obj.getUsuarioCasos().setReporteMedico(obj);*/
+
+
+        Log.i(TAG, "valor  de id de reporte Médico actualizado: " +  obj.getId());
+
+
+        Log.i(TAG, "actualizarreportemedico: " + obj);
+        postService = ConnectionRest.getConnection().create(ProyectoService.class);
+        Call<ReporteMedico> call =postService.updateReporteMedico(id,obj);
+        Log.i(TAG, "actualizarreportemedico: " + call);
+        call.enqueue(new Callback<ReporteMedico>() {
+            @Override
+            public void onResponse(Call<ReporteMedico> call, Response<ReporteMedico> response) {
+                Log.i(TAG, "PASO actualizarreportemedico: " + response);
+                Log.i(TAG, "PASO actualizarreportemedico: " + response.body());
+                Log.i(TAG, "PASO actualizarreportemedico: " + response.body().getReporteMedico());
+                Log.i(TAG, "PASO actualizarreportemedico: " + response.body().getMensaje());
+                if (!response.isSuccessful()){
+                    Log.i(TAG, "Algo salio mal" + response.body().getMensaje());
+                }else{
+                    Log.i(TAG, "Put Subido al API : " + response.body().getMensaje());
+                    Log.i(TAG, "Reporte actualizado : " + response.body().getReporteMedico());
+                    Log.i(TAG, "Mensaje de Response : " + response.body().getMensaje());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReporteMedico> call, Throwable t) {
+                Log.i(TAG, "Improbable subir PUT al API");
+                Toast.makeText(Triaje.this, "UsuarioCasos Actualizado (ver retorno)", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 
 
 }

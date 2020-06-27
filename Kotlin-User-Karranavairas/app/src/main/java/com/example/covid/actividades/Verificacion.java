@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
-import com.example.covid.MainActivity;
 import com.example.covid.R;
 import com.example.covid.entidades.Distritos;
 import com.example.covid.entidades.Gps;
@@ -25,10 +24,6 @@ import com.example.covid.entidades.UsuarioCasos;
 import com.example.covid.entidades.global.ClaseGlobal;
 import com.example.covid.servicios.ProyectoService;
 import com.example.covid.util.ConnectionRest;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -111,7 +106,7 @@ public class Verificacion extends AppCompatActivity {
 
                         reg.setId(com.getId());
                         reg.setNombre(com.getNombre());
-                        reg.setApellidos(com.getApellidos());
+                        reg.setApellido(com.getApellido());
                         Nacionalidad nacional = new Nacionalidad();
                         if(!(com.getNacionalidad() == null)){
                             nacional.setId(com.getNacionalidad().getId());
@@ -128,10 +123,10 @@ public class Verificacion extends AppCompatActivity {
                         //reg.setFechaNacimiento(com.getFechaNacimiento());
                         //Log.i(TAG, "fechanacimiento: " + dat);
                         Distritos dist = new Distritos();
-                        if(!(com.getDistritos() == null)) {
-                            dist.setId(com.getDistritos().getId());
-                            reg.setDistritos(dist);
-                            Log.i(TAG, "getDistritos: " + reg.getDistritos().getId());
+                        if(!(com.getDistrito() == null)) {
+                            dist.setId(com.getDistrito().getId());
+                            reg.setDistrito(dist);
+                            Log.i(TAG, "getDistritos: " + reg.getDistrito().getId());
                         }
                         reg.setTelefono(com.getTelefono());
                         reg.setDireccionDomicilio(com.getDireccionDomicilio());
@@ -208,6 +203,11 @@ public class Verificacion extends AppCompatActivity {
         //se actualiza los campos necesarios
         int codigoConfirmacion = Integer.parseInt(txtCodigo.getText().toString().trim());
         obj.setCodigoConfirmacion(codigoConfirmacion);
+
+        ClaseGlobal objGLobal = (ClaseGlobal) getApplicationContext();
+        UsuarioCasos usuarioGLobal = objGLobal.getUsuarioCasos();
+        usuarioGLobal.setCodigoConfirmacion(codigoConfirmacion);
+
         Log.i(TAG, "valor  de codigo confirmación actualizado: " +  obj.getCodigoConfirmacion());
         Log.i(TAG, "valor  de codigo confirmación actualizado: " +  obj.getId());
 

@@ -1,9 +1,11 @@
 package com.example.covid.entidades;
 
+import com.example.covid.entidades.response.ResponseDistrito;
+
 import java.util.List;
 
-public class Distritos {
-    private  int id;
+public class Distritos extends ResponseDistrito {
+    private  Long id;
     private String nombreDistrito;
     private Provincias provincia;
     private List<UsuarioCasos> usuarioCaso;
@@ -13,11 +15,11 @@ public class Distritos {
 
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

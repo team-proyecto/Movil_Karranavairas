@@ -18,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -25,125 +26,270 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.example.covid.R;
+import com.example.covid.entidades.EstadoEconomico;
+
+import com.example.covid.entidades.ReporteEconomico;
+
+
+import com.example.covid.entidades.UsuarioCasos;
+import com.example.covid.entidades.global.ClaseGlobal;
+import com.example.covid.servicios.ProyectoService;
+import com.example.covid.util.ConnectionRest;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
 
-public class SituacionEconomica extends AppCompatActivity{
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+public class SituacionEconomica extends AppCompatActivity {
 
-    ImageView   imgID;
+    private ProyectoService postService;
+    private static final String TAG = "LogsAndroid";
+
     CheckBox chkBeneficiario;
-    Button  btnTomarFoto,btnSeleccionarImagen;
+    Button btnRegistrarse;
     TextView txtRecibo;
     EditText txtMonto;
-    Uri imagenUri;
 
-    int TOMAR_FOTO=100;
-    int SELEC_IMAGEN=200;
-    String CARPETA_RAIZ = "MisFotosApp";
-    String CARPETA_IMAGENES = "imagenes";
-    String RUTA_IMAGEN = CARPETA_RAIZ + CARPETA_IMAGENES;
-    String path;
+    AwesomeValidation awesomeValidation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_situacion_economica);
 
-        imgID = findViewById(R.id.imgId);
         chkBeneficiario = findViewById(R.id.chkBeneficiario);
-        btnTomarFoto = findViewById(R.id.btnTomarFoto);
-        btnSeleccionarImagen = findViewById(R.id.btnSeleccionarImagen);
+
         txtRecibo = findViewById(R.id.txtRecibo);
         txtMonto = findViewById(R.id.txtMonto);
+        btnRegistrarse = findViewById(R.id.btnRegistrarse);
 
-        /*chkBeneficiario.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+
+        awesomeValidation.addValidation(SituacionEconomica.this, R.id.txtMonto, "^[1-9][0-9][0-9]$", R.string.error_bono);
+
+        chkBeneficiario.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                        tilMonto.setVisibility(View.VISIBLE);
-                        txtRecibo.setVisibility(View.VISIBLE);
-                        imgID.setVisibility(View.VISIBLE);
-                        btnImagen.setVisibility(View.VISIBLE);
+                if (isChecked) {
+                    txtMonto.setVisibility(View.VISIBLE);
+                    txtRecibo.setVisibility(View.VISIBLE);
+                } else {
+                    txtMonto.setVisibility(View.INVISIBLE);
+                    txtRecibo.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        btnRegistrarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(awesomeValidation.validate()) {
+                    Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_LONG).show();
+
+                    Boolean beneficio = chkBeneficiario.isChecked();
+                    double montoServicio = Double.parseDouble(txtMonto.getText().toString());
+
+                    //Traer Id de UsuarioCaso de memoria
+                    ClaseGlobal objLecturaGLobal = (ClaseGlobal) getApplicationContext();
+                    //Long idUsuarioCaso = objLecturaGLobal.getId();
+                    //Long idReporteEconomico = Long.valueOf(objLecturaGLobal.getReporteEconomico().getId());
+                    Log.i(TAG, "id en la clase global : " + objLecturaGLobal.getId());
+
+
+                    if(objLecturaGLobal.getReporteEconomico() == null){
+                        Log.i(TAG, "No guardo reporte economico en la memoria");
+                        Log.i(TAG, "No guardo reporte economico en la memoria" + objLecturaGLobal.getReporteEconomico());
+                        //crear nuevo reporte economico
+                        ReporteEconomico obj = new ReporteEconomico();
+                        obj.setBonoAsignado(beneficio);
+                        obj.setEstado(true);
+                        obj.setMontoServicio(montoServicio);
+                        EstadoEconomico estadoEconomico = new EstadoEconomico();
+                        obj.setEstadoEconomico(estadoEconomico);
+                        obj.getEstadoEconomico().setId(2);
+                        if(beneficio && obj.getMontoServicio()<100){
+                            obj.getEstadoEconomico().setId(1);
+                        }
+
+                        //Log.i(TAG, "UsuarioCaso a insertar en ReporteEconomico : " + obj.getUsuarioCasos().getId());
+                        registrarReporteEconomico(obj);
+
+                        //actualizar nuevo reporte economico en usaurio casos de memoria
+
+                        Log.i(TAG, "Se actualizo ReporteEconomico en usuario caso de ClaseGlobal ");
+
+                        Intent intent = new Intent(getApplicationContext(), FichaPersonal.class);
+                        startActivity(intent);
+                    }else{
+                        Log.i(TAG, "Si guardo reporte economico en la memoria");
+                        //actualizar el reporte Economico
+
+                        if(objLecturaGLobal.getReporteEconomico().getEstadoEconomico().getId()==1){
+                            ReporteEconomico obj = new ReporteEconomico();
+                            obj.setBonoAsignado(beneficio);
+                            obj.setEstado(true);
+                            obj.setMontoServicio(montoServicio);
+                            EstadoEconomico estadoEconomico = new EstadoEconomico();
+                            obj.setEstadoEconomico(estadoEconomico);
+                            obj.getEstadoEconomico().setId(2);
+                            if(beneficio && obj.getMontoServicio()<100){
+                                obj.getEstadoEconomico().setId(1);
+                            }
+
+                            actualizarReporteEconomico(objLecturaGLobal.getId(),obj);
+
+                            Intent intent = new Intent(getApplicationContext(), Menu.class);
+                            startActivity(intent);
+                        }
+                        else{
+                            Intent intent = new Intent(getApplicationContext(), Menu.class);
+                            startActivity(intent);
+                        }
+
+
+
+                    }
+
+
+
+                    Intent intent = new Intent(getApplicationContext(), Menu.class);
+                    startActivity(intent);
                 }else{
-                        tilMonto.setVisibility(View.INVISIBLE);
-                        txtRecibo.setVisibility(View.INVISIBLE);
-                        imgID.setVisibility(View.INVISIBLE);
-                        btnImagen.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getApplicationContext(),"No Success", Toast.LENGTH_LONG).show();
                 }
-            }
-        });*/
-
-        if(ContextCompat.checkSelfPermission(SituacionEconomica.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(SituacionEconomica.this,
-            new String[]{Manifest.permission.CAMERA,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
-        }
-        btnTomarFoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tomarFoto();
-            }
-        });
-        btnSeleccionarImagen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                seleccionarImagen();
             }
         });
     }
 
-    public void tomarFoto(){
-        String nombreImagen="";
-        File fileimagen = new File(Environment.getExternalStorageDirectory(), RUTA_IMAGEN);
-        boolean isCreada = fileimagen.exists();
-        if(isCreada == false){
-            isCreada = fileimagen.mkdirs();
-        }
-        if(isCreada == true){
-            nombreImagen = (System.currentTimeMillis()/1000) + ".jpg";
-        }
+    //metodo para crear reporte economico
+    private void registrarReporteEconomico(ReporteEconomico obj){
+        Log.i(TAG, "PASO 0_crearreporteeconomico: " + obj);
+        postService = ConnectionRest.getConnection().create(ProyectoService.class);
+        Call<ReporteEconomico> call = postService.saveReporteEconomico(obj);
+        Log.i(TAG, "PASO 0_crearreporteeconomico: " + call);
+        call.enqueue(new Callback<ReporteEconomico>() {
+            @Override
+            public void onResponse(Call<ReporteEconomico> call, Response<ReporteEconomico> response) {
+                Log.i(TAG, "PASO 0_crearreporteeconomico: " + response);
+                if (!response.isSuccessful()){
+                    Log.i(TAG, "Algo salio mal" + response.body());
+                }else{
 
-        path = Environment.getExternalStorageDirectory()+File.separator+RUTA_IMAGEN+File.separator+nombreImagen;
-        File imagen = new File(path);
+                    ReporteEconomico res = response.body();
 
-        Intent intent = null;
-        intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){
-            String authorities = this.getPackageName() + ".provider";
-            Uri imageUri = FileProvider.getUriForFile(this, authorities, imagen);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        }else{
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imagen));
-        }
-        startActivityForResult(intent, TOMAR_FOTO);
-    }
+                    Log.i(TAG, "Post Subido al API : " + response.body());
+                    Log.i(TAG, "El ID del nuevo Reporte economico : " + res.getReporteEconomico().getId());
 
-    public void seleccionarImagen(){
-        Intent galeria = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(galeria, SELEC_IMAGEN);
-    }
+                    //llamar clase global y ponerle losdatos que trae el nuevo Reporte Economico
+                    ClaseGlobal objGlobal = (ClaseGlobal) getApplicationContext();
+                    objGlobal.setReporteEconomico(res.getReporteEconomico());
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+                    //problema con fecha
+                    //objGlobal.getReporteEconomico().setFechaRegistro(null);
 
-        if (resultCode == RESULT_OK && requestCode == SELEC_IMAGEN) {
-            imagenUri = data.getData();
-            imgID.setImageURI(imagenUri);
-        } else if (resultCode == RESULT_OK && requestCode == TOMAR_FOTO) {
-            MediaScannerConnection.scanFile(SituacionEconomica.this, new String[]{path}, null, new MediaScannerConnection.OnScanCompletedListener() {
-                @Override
-                public void onScanCompleted(String path, Uri uri) {
 
+                    Log.i(TAG, "id-objGLobal-reporteEconomico: " + objGlobal.getReporteEconomico().getId());
+
+                    actualizarUsuarioCasos(objGlobal.getId(),objGlobal.getUsuarioCasos());
                 }
-            });
+            }
 
-            Bitmap bitmap = BitmapFactory.decodeFile(path);
-            imgID.setImageBitmap(bitmap);
-        }
-      }
+            @Override
+            public void onFailure(Call<ReporteEconomico> call, Throwable t) {
+                Log.i(TAG, "Improbable subir POST al API");
+                Toast.makeText(SituacionEconomica.this, "Registro Economico no Registrado (ver retorno)", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    private void actualizarUsuarioCasos(Long id, UsuarioCasos obj){
+
+        //se actualiza los campos necesarios
+        ClaseGlobal objGlobal = (ClaseGlobal) getApplicationContext();
+        obj.setReporteEconomico(objGlobal.getReporteEconomico());
+        obj.setFechaRegistro(null);
+
+
+        Log.i(TAG, "valor  de id de reporte Médico actualizado: " +  obj.getReporteEconomico().getId());
+        Log.i(TAG, "valor  de id de usuariocaso a actualizar: " +  id);
+
+        Log.i(TAG, "PASO 0_actualizarusuarioscasos: " + obj);
+        postService = ConnectionRest.getConnection().create(ProyectoService.class);
+        Call<UsuarioCasos> call =postService.updateUsuariosCasos(id,obj);
+        Log.i(TAG, "PASO 0_actualizarusuarioscasos: " + call);
+        call.enqueue(new Callback<UsuarioCasos>() {
+            @Override
+            public void onResponse(Call<UsuarioCasos> call, Response<UsuarioCasos> response) {
+                Log.i(TAG, "PASO 0_actualizarusuarioscasos: " + response);
+                Log.i(TAG, "PASO 1_actualizarusuarioscasos: " + response.body());
+                Log.i(TAG, "PASO 1_actualizarusuarioscasos: " + response.body().getUsuarioCaso());
+                Log.i(TAG, "PASO 1_actualizarusuarioscasos: " + response.body().getMensaje());
+                if (!response.isSuccessful()){
+                    Log.i(TAG, "Algo salio mal" + response.body().getMensaje());
+                }else{
+                    Log.i(TAG, "Put Subido al API : " + response.body().getMensaje());
+                    Log.i(TAG, "Nuevo Usuario Caso : " + response.body().getUsuarioCaso());
+                    Log.i(TAG, "Mensaje de Response : " + response.body().getMensaje());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UsuarioCasos> call, Throwable t) {
+                Log.i(TAG, "Improbable subir PUT al API");
+                Toast.makeText(SituacionEconomica.this, "UsuarioCasos Actualizado (ver retorno)", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void actualizarReporteEconomico(Long id, ReporteEconomico obj){
+
+        //se actualiza los campos necesarios
+        /*ClaseGlobal objGlobal = (ClaseGlobal) getApplicationContext();
+        obj.setReporteEconomico(objGlobal.getReporteEconomico());
+        obj.getUsuarioCasos().setReporteEconomico(obj);*/
+
+
+        Log.i(TAG, "valor  de id de reporte Médico actualizado: " +  obj.getId());
+
+
+        Log.i(TAG, "actualizarreporteeconomico: " + obj);
+        postService = ConnectionRest.getConnection().create(ProyectoService.class);
+        Call<ReporteEconomico> call =postService.updateReporteEconomico(id,obj);
+        Log.i(TAG, "actualizarreporteeconomico: " + call);
+        call.enqueue(new Callback<ReporteEconomico>() {
+            @Override
+            public void onResponse(Call<ReporteEconomico> call, Response<ReporteEconomico> response) {
+                Log.i(TAG, "PASO actualizarreporteeconomico: " + response);
+                Log.i(TAG, "PASO actualizarreporteeconomico: " + response.body());
+                //Log.i(TAG, "PASO actualizarreporteeconomico: " + response.body().getReporteEconomico());
+                //Log.i(TAG, "PASO actualizarreporteeconomico: " + response.body().getMensaje());
+                if (!response.isSuccessful()){
+                    Log.i(TAG, "Algo salio mal" + response.body().getMensaje());
+                }else{
+                    Log.i(TAG, "Put Subido al API : " + response.body().getMensaje());
+                    Log.i(TAG, "Reporte actualizado : " + response.body().getReporteEconomico());
+                    Log.i(TAG, "Mensaje de Response : " + response.body().getMensaje());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReporteEconomico> call, Throwable t) {
+                Log.i(TAG, "Improbable subir PUT al API");
+                Toast.makeText(SituacionEconomica.this, "UsuarioCasos Actualizado (ver retorno)", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.covid.servicios;
 
+import com.example.covid.entidades.Gps;
 import com.example.covid.entidades.Nacionalidad;
 import com.example.covid.entidades.Provincias;
 import com.example.covid.entidades.ReporteEconomico;
@@ -24,16 +25,30 @@ public interface ProyectoService {
 
     Call<List<TipoDocumento>> getTipoDocumentos();
 
+    //llenar combo departamentos
     @GET("usuarioscasos/departamentos")
     Call<List<Departamentos>> getDepartamentos();
 
-    //trae un departamento con sus provincias
+    //llenar provincias desde 1 departamento
     @GET("usuarioscasos/departamentos/{id}")
     Call<Departamentos> getProvincias(@Path(value="id") Long id);
 
-    //trae una provincia con sus distritos
+    //llenar distritos desde 1 provincia
     @GET("usuarioscasos/provincias/{id}")
     Call<Provincias> getDistritos(@Path(value="id") Long id);
+
+    //traer departamento desde nombre
+    @GET("usuarioscasos/departamentos/nombre/{nombreDepartamento}")
+    Call<Departamentos> getDepartamento(@Path(value="nombreDepartamento") String nombreDepartamento);
+
+    //traer provincia desde nombre
+    @GET("usuarioscasos/provincias/nombre/{nombreProvincia}")
+    Call<Provincias> getProvincia(@Path(value="nombreProvincia") String nombreProvincia);
+
+    //traer distrito desde nombre
+    @GET("usuarioscasos/distritos/nombre/{nombreDistrito}")
+    Call<Distritos> getDistrito(@Path(value="nombreDistrito") String nombreDistrito);
+
 
     @GET("usuarioscasos/nacionalidad")
     Call<List<Nacionalidad>> getNacionalidades();
@@ -61,6 +76,9 @@ public interface ProyectoService {
 
     @PUT("reconomicos/{id}")
     Call<ReporteEconomico> updateReporteEconomico(@Path(value="id") Long id, @Body ReporteEconomico obj);
+
+    @POST("gps")
+    Call<Gps> saveGps(@Body Gps obj);
 
 
 

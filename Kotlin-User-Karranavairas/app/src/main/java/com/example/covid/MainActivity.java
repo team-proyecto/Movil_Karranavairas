@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -29,7 +30,6 @@ import com.example.covid.entidades.TipoDocumento;
 import com.example.covid.entidades.TipoUsuario;
 import com.example.covid.entidades.UsuarioCasos;
 import com.example.covid.entidades.global.ClaseGlobal;
-import com.example.covid.entidades.response.ResponseRest;
 import com.example.covid.servicios.ProyectoService;
 import com.example.covid.util.ConnectionRest;
 
@@ -54,11 +54,14 @@ public class MainActivity extends AppCompatActivity{
         btnEnviar = findViewById(R.id.btnEnviar);
         chkAceptar = findViewById(R.id.chkAceptar);
 
-        final ClaseGlobal objGlobal = (ClaseGlobal) getApplicationContext();
+
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
 
-        awesomeValidation.addValidation(txtNumero,"[1-9]{9}","Solo 9 dígitos");
+
+        awesomeValidation.addValidation (MainActivity.this, R.id.txtNumero, "[0-9]{9}$", R.string.error_telefono);
+
+
 
         chkAceptar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -82,35 +85,38 @@ public class MainActivity extends AppCompatActivity{
 
         };
 
+        final ClaseGlobal objGlobal = (ClaseGlobal) getApplicationContext();
+        Log.i(TAG, "data en claseglobal: " + objGlobal);
+        Log.i(TAG, "data en claseglobal: " + objGlobal.getId());
+
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (awesomeValidation.validate()) {
-                    enviarMensaje("923001670", "Tú código de verificación es: 1234");
+
 
 
                     String telefono = txtNumero.getText().toString().trim();
                     Boolean condicion = chkAceptar.isChecked();
 
-                /*SimpleDateFormat fecha= new SimpleDateFormat("yyyy-MM-dd");
-                String sFecha = fecha.format(nacimiento);
-                Date dat=new Date();*/
-                    try {
-                        // dat = fecha.parse(sFecha);
-                        obtenerUsuariosCasoPorTelefono(telefono);
 
-                        if((objGlobal.getId()==null)){
+                    try {
+
+                        if(objGlobal != null){
+                            Log.i(TAG, "Habia info en memoria");
+                            obtenerUsuariosCasoPorTelefono(telefono, condicion);
+
+                        }else{
+                            Log.i(TAG, "No Habia info en memoria");
                             UsuarioCasos obj = new UsuarioCasos();
                             obj.setTelefono(telefono);
                             obj.setCondicionUso(condicion);
                             registrarUsuarioCasos(obj);
-                            Log.i(TAG, "onClick: " + obj.getId());
 
                             Intent intent = new Intent(getApplicationContext(), Verificacion.class);
                             startActivity(intent);
-                        }else{
-                            Intent intent = new Intent(getApplicationContext(), Menu.class);
-                            startActivity(intent);
+
+                            enviarMensaje("923001670", "Tú código de verificación es: 1234");
                         }
 
                     } catch (Exception e) {
@@ -145,7 +151,7 @@ public class MainActivity extends AppCompatActivity{
             public void onResponse(Call<UsuarioCasos> call, Response<UsuarioCasos> response) {
                 Log.i(TAG, "PASO 2_crearusuarioscasos: " + response);
                 if (!response.isSuccessful()){
-                    Log.i(TAG, "Algo salio mal" + response.body().toString());
+                    Log.i(TAG, "Algo salio mal : " + response.body());
                 }else{
 
                     UsuarioCasos res = response.body();
@@ -156,7 +162,7 @@ public class MainActivity extends AppCompatActivity{
 
                     //llamar clase global y ponerle losdatos que trae el response
                     ClaseGlobal objGlobal = (ClaseGlobal) getApplicationContext();
-                        objGlobal.setId(Long.valueOf(res.getUsuarioCaso().getId()));
+                        objGlobal.setId(res.getUsuarioCaso().getId());
                         objGlobal.setTelefono(res.getUsuarioCaso().getTelefono());
                         objGlobal.setCondicionUso(res.getUsuarioCaso().getCondicionUso());
                         objGlobal.setUsuarioCasos(res.getUsuarioCaso());
@@ -177,39 +183,28 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-    public void obtenerUsuariosCasoPorTelefono(String telefono) {
+    public void obtenerUsuariosCasoPorTelefono(final String telefono, final Boolean condicion) {
 
-        ProyectoService postService = ConnectionRest.getConnection().create(ProyectoService.class);
-
-        Call<UsuarioCasos> call = postService.obtenerUsuariosCasoPorTelefono(telefono);
+        postService = ConnectionRest.getConnection().create(ProyectoService.class);
+        Call<UsuarioCasos> call =postService.obtenerUsuariosCasoPorTelefono(telefono);
 
         call.enqueue(new Callback<UsuarioCasos>() {
             @Override
             public void onResponse(Call<UsuarioCasos> call, Response<UsuarioCasos> response) {
-                //UsuarioCasos usuarioOriginal;
+                Log.i(TAG, "Response : " + response.body());
                 if (response.isSuccessful()) {
-                    /*SimpleDateFormat fecha= new SimpleDateFormat("yyyy-MM-dd");
-                    String sFecha = fecha.format(fecha);
-                    Date dat=new Date();*/
                     try {
+                        Log.i(TAG, "Entro a buscar: ");
 
-                        final UsuarioCasos com = response.body(); // Esto es json completo
-
-
-                        //UsuarioCasos reg = new UsuarioCasos();
+                        UsuarioCasos com = response.body(); // Esto es json completo
+                        Log.i(TAG, "Response : " + response.body());
 
                         ClaseGlobal reg = (ClaseGlobal) getApplicationContext();
-                       /* objGlobal.setId(Long.valueOf(res.getUsuarioCaso().getId()));
-                        objGlobal.setTelefono(res.getUsuarioCaso().getTelefono());
-                        objGlobal.setCondicionUso(res.getUsuarioCaso().getCondicionUso());
 
-                        Log.i(TAG, "id-objGLobal: " + objGlobal.getId());
-                        Log.i(TAG, "telefono-objGLobal: " + objGlobal.getTelefono());
-                        Log.i(TAG, "condicionUso-objGLobal: " + objGlobal.getCondicionUso());*/
-
-                        reg.setId(Long.valueOf(com.getId()));
+                        reg.setId(com.getId());
+                        Log.i(TAG, "id-objGLobal: " + reg.getId());
                         reg.setNombre(com.getNombre());
-                        reg.setApellidos(com.getApellidos());
+                        reg.setApellido(com.getApellido());
                         Nacionalidad nacional = new Nacionalidad();
                         if(!(com.getNacionalidad() == null)){
                             nacional.setId(com.getNacionalidad().getId());
@@ -223,13 +218,13 @@ public class MainActivity extends AppCompatActivity{
                             Log.i(TAG, "getTipoDocumento: " + reg.getTipoDocumento().getId());
                         }
                         reg.setNumeroDocumento(com.getNumeroDocumento());
-                        //reg.setFechaNacimiento(com.getFechaNacimiento());
-                        //Log.i(TAG, "fechanacimiento: " + dat);
+                        reg.setNacimiento(com.getNacimiento());
+
                         Distritos dist = new Distritos();
-                        if(!(com.getDistritos() == null)) {
-                            dist.setId(com.getDistritos().getId());
-                            reg.setDistritos(dist);
-                            Log.i(TAG, "getDistritos: " + reg.getDistritos().getId());
+                        if(!(com.getDistrito() == null)) {
+                            dist.setId(com.getDistrito().getId());
+                            reg.setDistrito(dist);
+                            Log.i(TAG, "getDistritos: " + reg.getDistrito().getId());
                         }
                         reg.setTelefono(com.getTelefono());
                         reg.setDireccionDomicilio(com.getDireccionDomicilio());
@@ -262,13 +257,40 @@ public class MainActivity extends AppCompatActivity{
                             Log.i(TAG, "getReporteMedico: " + reg.getReporteMedico().getId());
                         }
                         reg.setEstado(com.getEstado());
+                        reg.setUsuarioCasos(com.getUsuarioCaso());
+
+                        Intent intent = new Intent(getApplicationContext(), Menu.class);
+                        startActivity(intent);
 
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
                 } else {
-                    Log.i("Base", "El metodo ha fallado" + response.errorBody());
+
+                    Log.i(TAG, "Entro a crear: ");
+
+                    Log.i(TAG, "Limpiando Clase Global... ");
+                    limpiarClaseGlobal();
+
+
+
+                    Log.i("Base", "No existe el usuario y se registrara" + response.errorBody());
+                    ClaseGlobal regc = (ClaseGlobal) getApplicationContext();
+
+                    Log.i(TAG, "va a registrar: " + regc.getId());
+
+                    UsuarioCasos obj = new UsuarioCasos();
+                    obj.setTelefono(telefono);
+                    obj.setCondicionUso(condicion);
+                    registrarUsuarioCasos(obj);
+                    Log.i(TAG, "Id nuevo creado : " + obj.getId());
+
+
+                    Intent intent = new Intent(getApplicationContext(), Verificacion.class);
+                    startActivity(intent);
+
+                    enviarMensaje("923001670", "Tú código de verificación es: 1234");
                 }
 
             }
@@ -280,6 +302,55 @@ public class MainActivity extends AppCompatActivity{
 
         });
 
+
+    }
+
+    /*@Override
+    public void onBackPressed() {
+        //moveTaskToBack(false);
+    }*/
+
+    /*@Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK) {
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            //Back buttons was pressed, do whatever logic you want
+        }
+
+        return false;
+    }*/
+
+    public void limpiarClaseGlobal(){
+        ClaseGlobal objGlobalLimpio = (ClaseGlobal) getApplicationContext();
+
+        objGlobalLimpio.setId(null);
+        objGlobalLimpio.setNombre(null);
+        objGlobalLimpio.setApellido(null);
+        objGlobalLimpio.setNacionalidad(null);
+        objGlobalLimpio.setTipoDocumento(null);
+        objGlobalLimpio.setNumeroDocumento(null);
+        objGlobalLimpio.setNacimiento(null);
+        objGlobalLimpio.setDistrito(null);
+        objGlobalLimpio.setTelefono(null);
+        objGlobalLimpio.setDireccionDomicilio(null);
+        objGlobalLimpio.setCodigoConfirmacion(null);
+        objGlobalLimpio.setCondicionUso(null);
+        objGlobalLimpio.setFechaRegistro(null);
+        objGlobalLimpio.setGps(null);
+        objGlobalLimpio.setTipoUsuario(null);
+        objGlobalLimpio.setReporteEconomico(null);
+        objGlobalLimpio.setReporteMedico(null);
+        objGlobalLimpio.setEstado(null);
+        objGlobalLimpio.setUsuarioCasos(null);
 
     }
 

@@ -4,20 +4,18 @@ import com.example.covid.entidades.response.ResponseRest;
 
 import java.util.Date;
 
+
 public class UsuarioCasos extends ResponseRest {
     private Long id;
     private String nombre;
-    private String apellidos;
+    private String apellido;
     private String numeroDocumento;
     private TipoDocumento tipoDocumento;
-    private int dni;
-    private Date fechaNacimiento;
+    private String nacimiento;
     private Distritos distrito;
-    //private Provincias nombreProvincia;
-    //private Departamentos nombreDepartamento;
     private String telefono;
     private String direccionDomicilio;
-    private int codigoConfirmacion;
+    private Integer codigoConfirmacion;
     private boolean condicionUso;
     private Date fechaRegistro;
     private Nacionalidad nacionalidad;
@@ -26,13 +24,6 @@ public class UsuarioCasos extends ResponseRest {
     private ReporteEconomico reporteEconomico;
     private ReporteMedico reporteMedico;
     private boolean estado;
-
-
-    public void prePersist() {
-        this.fechaRegistro = new Date();
-    }
-
-
 
     public Long getId() {
         return id;
@@ -50,12 +41,12 @@ public class UsuarioCasos extends ResponseRest {
         this.nombre = nombre;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getNumeroDocumento() {
@@ -74,45 +65,21 @@ public class UsuarioCasos extends ResponseRest {
         this.tipoDocumento = tipoDocumento;
     }
 
-    public int getDni() {
-        return dni;
+    public String getNacimiento() {
+        return nacimiento;
     }
 
-    public void setDni(int dni) {
-        this.dni = dni;
+    public void setNacimiento(String nacimiento) {
+        this.nacimiento = nacimiento;
     }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public Distritos getDistritos() {
+    public Distritos getDistrito() {
         return distrito;
     }
 
-    public void setDistritos(Distritos distrito) {
+    public void setDistrito(Distritos distrito) {
         this.distrito = distrito;
     }
-
-    /*public Provincias getNombreProvincia() {
-        return nombreProvincia;
-    }
-
-    public void setNombreProvincia(Provincias nombreProvincia) {
-        this.nombreProvincia = nombreProvincia;
-    }
-
-    public Departamentos getNombreDepartamento() {
-        return nombreDepartamento;
-    }
-
-    public void setNombreDepartamento(Departamentos nombreDepartamento) {
-        this.nombreDepartamento = nombreDepartamento;
-    }*/
 
     public String getTelefono() {
         return telefono;
@@ -130,11 +97,11 @@ public class UsuarioCasos extends ResponseRest {
         this.direccionDomicilio = direccionDomicilio;
     }
 
-    public int getCodigoConfirmacion() {
+    public Integer getCodigoConfirmacion() {
         return codigoConfirmacion;
     }
 
-    public void setCodigoConfirmacion(int codigoConfirmacion) {
+    public void setCodigoConfirmacion(Integer codigoConfirmacion) {
         this.codigoConfirmacion = codigoConfirmacion;
     }
 

@@ -1,8 +1,11 @@
 package com.example.covid.entidades;
 
+import com.example.covid.entidades.response.ResponseReporteEconomico;
+import com.example.covid.entidades.response.ResponseReporteMedico;
+
 import java.util.Date;
 
-public class ReporteEconomico {
+public class ReporteEconomico extends ResponseReporteEconomico {
 
     private int id;
     private boolean bonoAsignado;

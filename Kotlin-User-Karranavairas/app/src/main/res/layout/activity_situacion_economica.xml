@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="50dp"
+    android:orientation="vertical"
+    android:padding="30dp"
+    android:background="@drawable/bg"
     tools:context=".actividades.SituacionEconomica">
 
     <LinearLayout
@@ -12,56 +14,101 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/InformacionPersonal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Situación Económica"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="Estos fueron los bonos del frente al COVID 19 : " />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text=" - Bono 'Yo me quedo en casa' : S/ 380."
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text=" - Bono Independiente : S/ 760." />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text=" - Bono Familiar Universal : S/ 760." />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text=" - Bono para policías: S/ 720." />
+
+
         <CheckBox
             android:id="@+id/chkBeneficiario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="¿Usted ha sido beneficiario para el COVID-19?" />
+
+        <TextView
+            android:id="@+id/txtRecibo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:visibility="invisible"
+            android:text="Ingrese el promedio de sus 2 últimas boletas de recibo de luz" />
 
         <EditText
             android:id="@+id/txtMonto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="Ingrese el monto recibido" />
+            android:hint="Ingrese el promedio"
+            android:digits="0123465789"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:visibility="invisible" />
 
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txtRecibo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:text="Ingrese imagen de su recibo" />
-
-                <ImageView
-                    android:id="@+id/imgId"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="80dp"
-                    app:srcCompat="@drawable/nodisponible" />
-
-                <Button
-                    android:id="@+id/btnTomarFoto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:text="Tomar Foto" />
-
-
-
-                <Button
-                    android:id="@+id/btnSeleccionarImagen"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Seleccionar Imagen" />
-            </LinearLayout>
+        <Button
+            android:id="@+id/btnRegistrarse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ovalo"
+            android:text="Registrarse"
+            android:textColor="#42A5F5" />
 
     </LinearLayout>
 </RelativeLayout>

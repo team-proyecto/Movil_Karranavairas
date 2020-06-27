@@ -7,7 +7,12 @@ public class ConnectionRest {
     private static Retrofit retrofit = null;
 
     //private static final String REST ="http://localhost:8090/api/";
-    private static final String REST ="https://corona-spring.herokuapp.com/api/";
+    //private static final String REST ="https://corona-spring.herokuapp.com/api/";
+    //private static final String REST ="https://api-corona-spring.herokuapp.com/api/";
+    //private static final String REST ="https://corona-backend-pruebas.herokuapp.com/api/";
+    private static final String REST ="https://proyecto-int-api.herokuapp.com/api/";
+
+
 
 
 

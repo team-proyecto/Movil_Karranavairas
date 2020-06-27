@@ -5,16 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="15dp"
     tools:context=".actividades.FichaPersonal">
 
     <EditText
         android:id="@+id/txtNombres"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:digits="abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
         android:ems="10"
         android:hint="Nombres"
-        android:layout_marginLeft="10dp"
-        android:inputType="textPersonName"/>
+        android:inputType="textCapWords"
+        android:maxLength="20"
+        android:padding="10dp"
+        app:counterEnabled="true"
+        android:imeOptions="actionDone"
+        app:counterMaxLength="20"/>
 
     <EditText
         android:id="@+id/txtApellidos"
@@ -23,79 +31,95 @@
         android:layout_height="wrap_content"
         android:hint="Apellidos"
         android:ems="10"
-        android:inputType="textPersonName" />
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        android:maxLength="20"
+        android:imeOptions="actionDone"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:inputType="textCapWords|textPersonName" />
+
+    <TextView
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Seleccione Nacionalidad:"
+        android:textColor="#000000"
+        android:layout_marginTop="60dp"/>
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="200dp"
+        android:text="Tipo de Documento:"
+        android:textColor="#000000"
+        android:layout_marginTop="60dp"/>
 
     <Spinner
         android:id="@+id/spnNacionalidad"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="60dp" />
+        android:layout_marginTop="90dp" />
+
+
 
     <Button
         android:id="@+id/btnRegistarse"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="550dp"
         android:src="@drawable/ovalo"
         android:text="Registrarse"
-        android:onClick="onClick"
-        android:textColor="@color/aqua" />
-
-    <TextView
-        android:id="@+id/idLatitud"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="350dp" />
-
-    <TextView
-        android:id="@+id/idLongitud"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="350dp" />
+        android:textColor="#42A5F5" />
 
 
     <EditText
         android:id="@+id/txtDNI"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
         android:hint="DNI"
-        android:layout_marginLeft="10dp"
-        android:inputType="textPersonName" />
+        android:inputType="number"
+        android:maxLength="8"
+        android:padding="10dp"
+        app:counterEnabled="true"
+        android:imeOptions="actionDone"
+        app:counterMaxLength="8" />
 
     <EditText
         android:id="@+id/txtNacimiento"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="150dp"
         android:ems="10"
         android:hint="Nacimiento"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="100dp"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/txtTelefono"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:ems="10"
-        android:hint="Teléfono"
-        android:layout_marginLeft="10dp"
-        android:inputType="textPersonName"/>
+        android:inputType="none"
+        android:padding="10dp"
+        android:focusable="false"
+        android:clickable="true"
+        android:imeOptions="actionDone" />
 
     <EditText
         android:id="@+id/txtDireccion"
         android:layout_width="350dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="500dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_marginLeft="10dp"
         android:inputType="textPersonName"
+        app:counterEnabled="true"
+        app:counterMaxLength="30"
+        android:maxLength="30"
+        android:imeOptions="actionDone"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
         android:hint="Dirección"/>
 
     <Spinner
@@ -103,51 +127,54 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="200dp"
-        android:layout_marginTop="60dp" />
+        android:layout_marginTop="90dp" />
 
     <Spinner
         android:id="@+id/spnDistritos"
-        android:layout_width="100dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="200dp" />
+        android:layout_marginTop="410dp" />
 
     <Spinner
         android:id="@+id/spnProvincias"
-        android:layout_width="100dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="200dp" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="340dp"/>
 
     <Spinner
         android:id="@+id/spnDepartamentos"
-        android:layout_width="100dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="200dp" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:layout_marginLeft="250dp"
-        android:text="Departamento:" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="180dp"
-        android:text="Provincias:" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="270dp" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="250dp"
+        android:text="Departamento:"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="320dp"
+        android:textColor="#000000"
+        android:text="Provincias:" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="390dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#000000"
         android:text="Distrito:" />
 
 </RelativeLayout>

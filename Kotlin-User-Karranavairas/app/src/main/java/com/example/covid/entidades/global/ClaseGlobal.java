@@ -2,9 +2,11 @@ package com.example.covid.entidades.global;
 
 import android.app.Application;
 
+import com.example.covid.entidades.Departamentos;
 import com.example.covid.entidades.Distritos;
 import com.example.covid.entidades.Gps;
 import com.example.covid.entidades.Nacionalidad;
+import com.example.covid.entidades.Provincias;
 import com.example.covid.entidades.ReporteEconomico;
 import com.example.covid.entidades.ReporteMedico;
 import com.example.covid.entidades.TipoDocumento;
@@ -12,20 +14,22 @@ import com.example.covid.entidades.TipoUsuario;
 import com.example.covid.entidades.UsuarioCasos;
 
 import java.util.Date;
+import java.util.List;
+
 
 public class ClaseGlobal extends Application {
 
     private Long id;
     private String nombre;
-    private String apellidos;
+    private String apellido;
     private Nacionalidad nacionalidad;
     private TipoDocumento tipoDocumento;
     private String numeroDocumento;
-    private Date fechaNacimiento;
-    private Distritos distritos;
+    private String nacimiento;
+    private Distritos distrito;
     private String telefono;
     private String direccionDomicilio;
-    private int codigoConfirmacion;
+    private Integer codigoConfirmacion;
     private Boolean condicionUso;
     private Date fechaRegistro;
     private Gps gps;
@@ -35,6 +39,53 @@ public class ClaseGlobal extends Application {
     private Boolean estado;
 
     private UsuarioCasos usuarioCasos;
+
+    private Departamentos departamentos;
+    private Provincias provincias;
+
+    private List<TipoDocumento> listaDocumentos;
+    private List<Nacionalidad> listaNacionalidad;
+
+
+    public List<TipoDocumento> getListaDocumentos() {
+        return listaDocumentos;
+    }
+
+    public void setListaDocumentos(List<TipoDocumento> listaDocumentos) {
+        this.listaDocumentos = listaDocumentos;
+    }
+
+    public List<Nacionalidad> getListaNacionalidad() {
+        return listaNacionalidad;
+    }
+
+    public void setListaNacionalidad(List<Nacionalidad> listaNacionalidad) {
+        this.listaNacionalidad = listaNacionalidad;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public Departamentos getDepartamentos() {
+        return departamentos;
+    }
+
+    public void setDepartamentos(Departamentos departamentos) {
+        this.departamentos = departamentos;
+    }
+
+    public Provincias getProvincias() {
+        return provincias;
+    }
+
+    public void setProvincias(Provincias provincias) {
+        this.provincias = provincias;
+    }
 
     public UsuarioCasos getUsuarioCasos() {
         return usuarioCasos;
@@ -60,13 +111,7 @@ public class ClaseGlobal extends Application {
         this.nombre = nombre;
     }
 
-    public String getApellidos() {
-        return apellidos;
-    }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
 
     public Nacionalidad getNacionalidad() {
         return nacionalidad;
@@ -92,20 +137,20 @@ public class ClaseGlobal extends Application {
         this.numeroDocumento = numeroDocumento;
     }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
+    public String getNacimiento() {
+        return nacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setNacimiento(String nacimiento) {
+        this.nacimiento = nacimiento;
     }
 
-    public Distritos getDistritos() {
-        return distritos;
+    public Distritos getDistrito() {
+        return distrito;
     }
 
-    public void setDistritos(Distritos distritos) {
-        this.distritos = distritos;
+    public void setDistrito(Distritos distrito) {
+        this.distrito = distrito;
     }
 
     public String getTelefono() {
@@ -124,11 +169,11 @@ public class ClaseGlobal extends Application {
         this.direccionDomicilio = direccionDomicilio;
     }
 
-    public int getCodigoConfirmacion() {
+    public Integer getCodigoConfirmacion() {
         return codigoConfirmacion;
     }
 
-    public void setCodigoConfirmacion(int codigoConfirmacion) {
+    public void setCodigoConfirmacion(Integer codigoConfirmacion) {
         this.codigoConfirmacion = codigoConfirmacion;
     }
 

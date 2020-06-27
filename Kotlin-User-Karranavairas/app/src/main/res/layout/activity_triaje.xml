@@ -6,17 +6,34 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:padding="50dp"
+    android:background="@drawable/bg"
     tools:context=".actividades.Triaje">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <TextView
+            android:id="@+id/Triaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="120dp"
+            android:gravity="center_horizontal"
+            android:text="Triaje"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
             android:text="Verifica que no sea una emergencia" />
 
         <TextView
@@ -24,6 +41,8 @@
             android:layout_width="247dp"
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
             android:text="Llama al 106 (SAMU) o al 117 (EsSalud) si tienes algunos de estos síntomas:" />
 
         <TextView
@@ -31,6 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
             android:text="Sensación de falta de aire o dificultad para respirar." />
 
         <TextView
@@ -38,6 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
             android:text="Desorientación o confusión." />
 
         <TextView
@@ -45,6 +68,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
             android:text="Fiebre mayor a 38°C persistente por más de 2 días." />
 
         <TextView
@@ -52,6 +77,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
             android:text="Dolor de pecho." />
 
         <TextView
@@ -59,6 +86,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
             android:text="Coloración azul en los labios (cianosis)." />
 
         <CheckBox

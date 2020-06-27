@@ -20,4 +20,13 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+
+    <string name="error_nombre">Ingrese su nombre</string>
+    <string name="error_apellido">Ingrese su apellido</string>
+    <string name="error_dni">Ingrese su DNI</string>
+    <string name="error_direccion">Ingrese su direccion</string>
+    <string name="error_telefono">Ingrese telefono</string>
+    <string name="error_imagen">Ingrese imagen</string>
+    <string name="error_bono">Ingrese bono</string>
+    <string name="error_fecha">Ingrese fecha</string>
 </resources>

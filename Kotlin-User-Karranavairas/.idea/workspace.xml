@@ -6,7 +6,74 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="39710ca9-773b-44b5-872d-7e9c75346dd3" name="Default Changelist" comment="" />
+    <list default="true" id="39710ca9-773b-44b5-872d-7e9c75346dd3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/actividades/Informacion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/response/ResponseDistrito.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/response/ResponseGps.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/response/ResponseReporteEconomico.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/economica.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/fallecidosbg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/infectadosbg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/info.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/necesitadosbg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/recuperadosbg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/reporte.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/triaje.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_informacion.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/fileContent/fileContent.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/resourceHashesCache.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/classAnalysis.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/jarAnalysis.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/javaCompile.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/taskHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/covid/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/covid/actividades/FichaPersonal.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/actividades/FichaPersonal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/covid/actividades/Infectados.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/actividades/Infectados.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/covid/actividades/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/actividades/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/covid/actividades/SituacionEconomica.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/actividades/SituacionEconomica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/covid/actividades/Triaje.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/actividades/Triaje.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/covid/actividades/Verificacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/actividades/Verificacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/Departamentos.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/Departamentos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/Distritos.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/Distritos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/Gps.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/Gps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/Provincias.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/Provincias.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/ReporteEconomico.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/ReporteEconomico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/UsuarioCasos.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/UsuarioCasos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/global/ClaseGlobal.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/entidades/global/ClaseGlobal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/covid/servicios/ProyectoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/servicios/ProyectoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/covid/util/ConnectionRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/covid/util/ConnectionRest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_ficha_personal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_ficha_personal.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_infectados.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_infectados.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_situacion_economica.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_situacion_economica.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_triaje.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_triaje.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_verificacion.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_verificacion.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,18 +100,31 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1d9MKzDMymJg1FcIPNpHYpFo447" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Nexus_5X_API_25" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-06-27T03:05:04.051Z" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
   </component>
   <component name="RecentsManager">
+    <key name="android.template.-989241856">
+      <recent name="com.example.covid.actividades" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
+    </key>
     <key name="android.template.329799902">
       <recent name="com.example.covid" />
     </key>
@@ -135,19 +215,28 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="266" y="167" width="800" height="684" key="#Notifications" timestamp="1593227319468">
+      <screen x="43" y="27" width="1877" height="1053" />
+    </state>
+    <state x="266" y="167" width="800" height="684" key="#Notifications/43.27.1877.1053@43.27.1877.1053" timestamp="1593227319468" />
     <state x="439" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592441518386">
       <screen x="43" y="27" width="1877" height="1053" />
     </state>
     <state x="439" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/43.27.1877.1053@43.27.1877.1053" timestamp="1592441518386" />
-    <state x="794" y="248" width="364" height="640" key="#com.intellij.ide.util.MemberChooser" timestamp="1592805123816">
+    <state x="794" y="248" width="374" height="633" key="#com.intellij.ide.util.MemberChooser" timestamp="1593222851811">
       <screen x="43" y="27" width="1877" height="1053" />
     </state>
     <state x="2688" y="227" width="374" height="633" key="#com.intellij.ide.util.MemberChooser/43.27.1877.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592710970900" />
-    <state x="794" y="248" width="364" height="640" key="#com.intellij.ide.util.MemberChooser/43.27.1877.1053/1920.0.1920.1080@43.27.1877.1053" timestamp="1592805123816" />
-    <state x="664" y="280" width="624" height="554" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1592440846488">
-      <screen x="43" y="27" width="1877" height="1053" />
+    <state x="794" y="248" width="364" height="640" key="#com.intellij.ide.util.MemberChooser/43.27.1877.1053/1920.0.1920.1080@43.27.1877.1053" timestamp="1593167025515" />
+    <state x="794" y="248" width="374" height="633" key="#com.intellij.ide.util.MemberChooser/43.27.1877.1053@43.27.1877.1053" timestamp="1593222851811" />
+    <state x="2555" y="259" width="624" height="554" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1593131430616">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="2555" y="259" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/43.27.1877.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1593131430616" />
     <state x="664" y="280" width="624" height="554" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/43.27.1877.1053/1920.0.1920.1080@43.27.1877.1053" timestamp="1592440846488" />
     <state x="2613" y="288" width="524" height="510" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1592705458580">
       <screen x="1920" y="0" width="1920" height="1080" />
@@ -157,36 +246,48 @@
       <screen x="43" y="27" width="1877" height="1053" />
     </state>
     <state x="714" y="302" width="524" height="510" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/43.27.1877.1053/1920.0.1920.1080@43.27.1877.1053" timestamp="1592805030515" />
-    <state width="1594" height="309" key="GridCell.Tab.0.bottom" timestamp="1592812970470">
+    <state width="1446" height="418" key="GridCell.Tab.0.bottom" timestamp="1593231540336">
       <screen x="43" y="27" width="1877" height="1053" />
     </state>
-    <state width="1563" height="90" key="GridCell.Tab.0.bottom/43.27.1877.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592714816316" />
-    <state width="1596" height="274" key="GridCell.Tab.0.bottom/43.27.1877.1053/1920.0.1920.1080@43.27.1877.1053" timestamp="1592811648485" />
-    <state width="1594" height="309" key="GridCell.Tab.0.bottom/43.27.1877.1053@43.27.1877.1053" timestamp="1592812970470" />
-    <state width="1594" height="309" key="GridCell.Tab.0.center" timestamp="1592812970470">
+    <state width="1574" height="395" key="GridCell.Tab.0.bottom/43.27.1877.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1593132912755" />
+    <state width="1446" height="418" key="GridCell.Tab.0.bottom/43.27.1877.1053/1920.0.1920.1080@43.27.1877.1053" timestamp="1593231540336" />
+    <state width="1455" height="215" key="GridCell.Tab.0.bottom/43.27.1877.1053@43.27.1877.1053" timestamp="1593227216857" />
+    <state width="1446" height="418" key="GridCell.Tab.0.center" timestamp="1593231540335">
       <screen x="43" y="27" width="1877" height="1053" />
     </state>
-    <state width="1563" height="90" key="GridCell.Tab.0.center/43.27.1877.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592714816316" />
-    <state width="1596" height="274" key="GridCell.Tab.0.center/43.27.1877.1053/1920.0.1920.1080@43.27.1877.1053" timestamp="1592811648485" />
-    <state width="1594" height="309" key="GridCell.Tab.0.center/43.27.1877.1053@43.27.1877.1053" timestamp="1592812970470" />
-    <state width="1594" height="309" key="GridCell.Tab.0.left" timestamp="1592812970470">
+    <state width="1574" height="395" key="GridCell.Tab.0.center/43.27.1877.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1593132912755" />
+    <state width="1446" height="418" key="GridCell.Tab.0.center/43.27.1877.1053/1920.0.1920.1080@43.27.1877.1053" timestamp="1593231540335" />
+    <state width="1455" height="215" key="GridCell.Tab.0.center/43.27.1877.1053@43.27.1877.1053" timestamp="1593227216857" />
+    <state width="1446" height="418" key="GridCell.Tab.0.left" timestamp="1593231540335">
       <screen x="43" y="27" width="1877" height="1053" />
     </state>
-    <state width="1563" height="90" key="GridCell.Tab.0.left/43.27.1877.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592714816316" />
-    <state width="1596" height="274" key="GridCell.Tab.0.left/43.27.1877.1053/1920.0.1920.1080@43.27.1877.1053" timestamp="1592811648485" />
-    <state width="1594" height="309" key="GridCell.Tab.0.left/43.27.1877.1053@43.27.1877.1053" timestamp="1592812970470" />
-    <state width="1594" height="309" key="GridCell.Tab.0.right" timestamp="1592812970470">
+    <state width="1574" height="395" key="GridCell.Tab.0.left/43.27.1877.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1593132912755" />
+    <state width="1446" height="418" key="GridCell.Tab.0.left/43.27.1877.1053/1920.0.1920.1080@43.27.1877.1053" timestamp="1593231540335" />
+    <state width="1455" height="215" key="GridCell.Tab.0.left/43.27.1877.1053@43.27.1877.1053" timestamp="1593227216856" />
+    <state width="1446" height="418" key="GridCell.Tab.0.right" timestamp="1593231540335">
       <screen x="43" y="27" width="1877" height="1053" />
     </state>
-    <state width="1563" height="90" key="GridCell.Tab.0.right/43.27.1877.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592714816316" />
-    <state width="1596" height="274" key="GridCell.Tab.0.right/43.27.1877.1053/1920.0.1920.1080@43.27.1877.1053" timestamp="1592811648485" />
-    <state width="1594" height="309" key="GridCell.Tab.0.right/43.27.1877.1053@43.27.1877.1053" timestamp="1592812970470" />
-    <state x="2519" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1592784591853">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state width="1574" height="395" key="GridCell.Tab.0.right/43.27.1877.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1593132912755" />
+    <state width="1446" height="418" key="GridCell.Tab.0.right/43.27.1877.1053/1920.0.1920.1080@43.27.1877.1053" timestamp="1593231540335" />
+    <state width="1455" height="215" key="GridCell.Tab.0.right/43.27.1877.1053@43.27.1877.1053" timestamp="1593227216857" />
+    <state x="738" y="333" width="476" height="448" key="chooseDestDirectoryDialog" timestamp="1593202869759">
+      <screen x="43" y="27" width="1877" height="1053" />
     </state>
-    <state x="2519" y="363" key="com.intellij.ide.util.TipDialog/43.27.1877.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1592784591853" />
-    <state x="629" y="381" key="com.intellij.ide.util.TipDialog/43.27.1877.1053/1920.0.1920.1080@43.27.1877.1053" timestamp="1592440865017" />
-    <state x="629" y="381" key="com.intellij.ide.util.TipDialog/43.27.1877.1053@43.27.1877.1053" timestamp="1592441447746" />
+    <state x="738" y="333" width="476" height="448" key="chooseDestDirectoryDialog/43.27.1877.1053@43.27.1877.1053" timestamp="1593202869759" />
+    <state x="143" y="127" width="1677" height="853" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1593227698243">
+      <screen x="43" y="27" width="1877" height="1053" />
+    </state>
+    <state x="143" y="127" width="1677" height="853" key="com.android.tools.idea.avdmanager.AvdListDialog/43.27.1877.1053/1920.0.1920.1080@43.27.1877.1053" timestamp="1593227698243" />
+    <state x="629" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1593231895089">
+      <screen x="43" y="27" width="1877" height="1053" />
+    </state>
+    <state x="2519" y="363" key="com.intellij.ide.util.TipDialog/43.27.1877.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1593131483319" />
+    <state x="629" y="381" key="com.intellij.ide.util.TipDialog/43.27.1877.1053/1920.0.1920.1080@43.27.1877.1053" timestamp="1593227675281" />
+    <state x="629" y="381" key="com.intellij.ide.util.TipDialog/43.27.1877.1053@43.27.1877.1053" timestamp="1593231895089" />
+    <state x="618" y="139" width="726" height="828" key="find.popup" timestamp="1593148949493">
+      <screen x="43" y="27" width="1877" height="1053" />
+    </state>
+    <state x="618" y="139" width="726" height="828" key="find.popup/43.27.1877.1053/1920.0.1920.1080@43.27.1877.1053" timestamp="1593148949493" />
     <state x="675" y="180" width="602" height="754" key="refactoring.ChangeSignatureDialog" timestamp="1592802937046">
       <screen x="43" y="27" width="1877" height="1053" />
     </state>
