@@ -3,12 +3,15 @@ package com.example.covid.actividades;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.covid.R;
 import com.example.covid.entidades.global.ClaseGlobal;
 
 public class Informacion extends AppCompatActivity {
+
+    private static final String TAG = "LogsAndroid";
     TextView txtNombre,txtApellidos,txtTipoDocumento, txtDNI, txtFechaNacimiento,
             txtTelefono, txtDireccion, txtNacionalidad,txtReporteEconomico,txtReporteMedico;
     @Override
@@ -27,18 +30,21 @@ public class Informacion extends AppCompatActivity {
 
         ClaseGlobal reg = (ClaseGlobal) getApplicationContext();
 
-        txtNombre.setText(""+reg.getUsuarioCasos().getNombre());
-        txtApellidos.setText(""+reg.getUsuarioCasos().getApellido());
+
+            Log.i(TAG, "nombre en memoria: " + reg.getNombre());
+            //Log.i(TAG, "nombre en objeto memoria: " + reg.getUsuarioCasos().getNombre());
+            txtNombre.setText("" + reg.getNombre());
+            txtApellidos.setText("" + reg.getApellido());
 
         /*if(reg.getTipoDocumento()!=null) {
             txtTipoDocumento.setText("" + reg.getTipoDocumento().getNombreDocumento());
         }*/
-        txtDNI.setText(""+reg.getUsuarioCasos().getNumeroDocumento());
+            txtDNI.setText("" + reg.getNumeroDocumento());
 
-        txtFechaNacimiento.setText("" + reg.getUsuarioCasos().getNacimiento());
+            txtFechaNacimiento.setText("" + reg.getNacimiento());
 
-        txtTelefono.setText(""+reg.getUsuarioCasos().getTelefono());
-        txtDireccion.setText(""+reg.getUsuarioCasos().getDireccionDomicilio());
+            txtTelefono.setText("" + reg.getTelefono());
+            txtDireccion.setText("" + reg.getDireccionDomicilio());
 
         /*if(reg.getNacionalidad()!=null) {
             txtNacionalidad.setText("" + reg.getNacionalidad().getNombreNacionalidad());

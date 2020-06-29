@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,7 +31,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.sql.Date;
+
 import java.text.SimpleDateFormat;
 
 import retrofit2.Call;
@@ -40,6 +41,7 @@ import retrofit2.Response;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
+import com.example.covid.MainActivity;
 import com.example.covid.entidades.Departamentos;
 import com.example.covid.entidades.Distritos;
 import com.example.covid.entidades.Gps;
@@ -57,6 +59,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -203,9 +206,12 @@ public class FichaPersonal extends AppCompatActivity implements View.OnClickList
                     try {
 
                         usuarioGlobal.setNacimiento(nacimiento);
+                        objLecturaGlobal.setNacimiento(nacimiento);
                         Log.i(TAG, "nacimientoGlobal: " + usuarioGlobal.getNacimiento());
                         usuarioGlobal.setNombre(nombre);
+                        objLecturaGlobal.setNombre(nombre);
                         usuarioGlobal.setApellido(apellido);
+                        objLecturaGlobal.setApellido(apellido);
 
 
                         if(objLecturaGlobal.getListaNacionalidad() != null) {
@@ -220,6 +226,7 @@ public class FichaPersonal extends AppCompatActivity implements View.OnClickList
                                     Nacionalidad objNacional = new Nacionalidad();
                                     objNacional.setId(com.get(i).getId());
                                     usuarioGlobal.setNacionalidad(objNacional);
+                                    objLecturaGlobal.setNacionalidad(objNacional);
                                     Log.i(TAG, "nacionalidadGlobal: " + usuarioGlobal.getNacionalidad().getId());
                                     break;
                                 }
@@ -238,6 +245,7 @@ public class FichaPersonal extends AppCompatActivity implements View.OnClickList
                                     TipoDocumento objDocumento = new TipoDocumento();
                                     objDocumento.setId(com.get(i).getId());
                                     usuarioGlobal.setTipoDocumento(objDocumento);
+                                    objLecturaGlobal.setTipoDocumento(objDocumento);
                                     Log.i(TAG, "documentoGlobal: " + usuarioGlobal.getTipoDocumento().getId());
                                     break;
                                 }
@@ -245,17 +253,20 @@ public class FichaPersonal extends AppCompatActivity implements View.OnClickList
                         }
 
                         usuarioGlobal.setNumeroDocumento(dni);
+                        objLecturaGlobal.setNumeroDocumento(dni);
 
                         if(!(objLecturaGlobal.getDistrito().getId()==null)) {
                             Distritos objDist = new Distritos();
                             if (!(distritos == 0)) {
                                 objDist.setId(distritos);
                                 usuarioGlobal.setDistrito(objDist);
+                                objLecturaGlobal.setDistrito(objDist);
                                 Log.i(TAG, "distrito: " + usuarioGlobal.getDistrito().getId());
                             }
                         }
 
                         usuarioGlobal.setDireccionDomicilio(direccion);
+                        objLecturaGlobal.setDireccionDomicilio(direccion);
 
                         actualizarUsuarioCasos(objLecturaGlobal.getId(),usuarioGlobal);
 
@@ -296,7 +307,17 @@ public class FichaPersonal extends AppCompatActivity implements View.OnClickList
                     calendar.set(Calendar.MONTH,month);
                     calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    txtNacimiento.setText(simpleDateFormat.format(calendar.getTime()));
+
+
+                    if((calendar.getTime().compareTo(new Date())>0)){
+                        txtNacimiento.setText("");
+                        Toast.makeText(getApplicationContext(),"La fecha debe ser menor que la actual",Toast.LENGTH_LONG).show();
+                    }else{
+                        txtNacimiento.setText(simpleDateFormat.format(calendar.getTime()));
+                    }
+
+
+
             }
         };
 
@@ -749,6 +770,7 @@ public class FichaPersonal extends AppCompatActivity implements View.OnClickList
                     //llamar clase global y ponerle losdatos que trae el nuevo Objeto Gps
                     ClaseGlobal objGlobal = (ClaseGlobal) getApplicationContext();
                     objGlobal.getUsuarioCasos().setGps(res.getGps());
+                    objGlobal.setGps(res.getGps());
                     //problema con fecha
                     //objGlobal.getGps().setFechaRegistro(null);
 
@@ -795,8 +817,41 @@ public class FichaPersonal extends AppCompatActivity implements View.OnClickList
             }
         });
     }
+    private void cargarUsuarioGlobal(){
+        ClaseGlobal obj = (ClaseGlobal) getApplicationContext();
+        UsuarioCasos usuarioGlobal =  obj.getUsuarioCasos();
 
+        usuarioGlobal.setId(obj.getId());
+        usuarioGlobal.setNombre(obj.getNombre());
+        usuarioGlobal.setApellido(obj.getApellido());
+        usuarioGlobal.setNacionalidad(obj.getNacionalidad());
+        usuarioGlobal.setTipoDocumento(obj.getTipoDocumento());
+        usuarioGlobal.setNumeroDocumento(obj.getNumeroDocumento());
+        usuarioGlobal.setNacimiento(obj.getNacimiento());
+        usuarioGlobal.setDistrito(obj.getDistrito());
+        usuarioGlobal.setTelefono(obj.getTelefono());
+        usuarioGlobal.setDireccionDomicilio(obj.getDireccionDomicilio());
+        usuarioGlobal.setCodigoConfirmacion(obj.getCodigoConfirmacion());
+        usuarioGlobal.setCondicionUso(obj.getCondicionUso());
+        usuarioGlobal.setFechaRegistro(obj.getFechaRegistro());
+        usuarioGlobal.setGps(obj.getGps());
+        usuarioGlobal.setTipoUsuario(obj.getTipoUsuario());
+        usuarioGlobal.setReporteEconomico(obj.getReporteEconomico());
+        usuarioGlobal.setReporteMedico(obj.getReporteMedico());
+        usuarioGlobal.setEstado(obj.getEstado());
+    }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
+
+        return false;
+    }
 
 
 }

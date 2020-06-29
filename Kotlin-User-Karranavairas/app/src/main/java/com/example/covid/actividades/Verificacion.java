@@ -54,8 +54,7 @@ public class Verificacion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(awesomeValidation.validate()) {
-                    Intent intent = new Intent(getApplicationContext(), Triaje.class);
-                    startActivity(intent);
+
 
                     ClaseGlobal objLecturaGLobal = (ClaseGlobal) getApplicationContext();
                     Long id = objLecturaGLobal.getId();
@@ -66,7 +65,21 @@ public class Verificacion extends AppCompatActivity {
                 String sFecha = fecha.format(nacimiento);
                 Date dat=new Date();*/
                     try {
-                        updateUsuariosCaso(id);
+                        if(objLecturaGLobal.getTipoDocumento()==null){
+                            updateUsuariosCaso(id);
+
+                            Intent intent = new Intent(getApplicationContext(), Triaje.class);
+                            startActivity(intent);
+                        }else{
+                            updateUsuariosCaso(id);
+
+                            Intent intent = new Intent(getApplicationContext(), Menu.class);
+                            startActivity(intent);
+                        }
+
+
+
+
                     } catch (Exception e ){
                         e.printStackTrace();
                     }
@@ -207,6 +220,7 @@ public class Verificacion extends AppCompatActivity {
         ClaseGlobal objGLobal = (ClaseGlobal) getApplicationContext();
         UsuarioCasos usuarioGLobal = objGLobal.getUsuarioCasos();
         usuarioGLobal.setCodigoConfirmacion(codigoConfirmacion);
+        objGLobal.setCodigoConfirmacion(codigoConfirmacion);
 
         Log.i(TAG, "valor  de codigo confirmación actualizado: " +  obj.getCodigoConfirmacion());
         Log.i(TAG, "valor  de codigo confirmación actualizado: " +  obj.getId());

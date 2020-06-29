@@ -25,7 +25,7 @@ public class ReporteMedico extends ResponseReporteMedico {
         this.id = id;
     }
 
-    public boolean isResultadoTriaje() {
+    public boolean getResultadoTriaje() {
         return resultadoTriaje;
     }
 

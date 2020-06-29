@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -89,10 +90,13 @@ public class Triaje extends AppCompatActivity  {
                     startActivity(intent);
                 }else{
                     Log.i(TAG, "Si guardo reporte medico en la memoria");
+                    Log.i(TAG, "resultado triaje : " + objLecturaGLobal.getReporteMedico().getResultadoTriaje());
+
                     //actualizar el reporte Medico
 
-                    if(objLecturaGLobal.getReporteMedico().getEstadoMedico().getId()==1){
+                    if(objLecturaGLobal.getReporteMedico()!=null){
                         ReporteMedico obj = new ReporteMedico();
+                        obj.setId(objLecturaGLobal.getReporteMedico().getId());
                         obj.setResultadoTriaje(sintomas);
                         EstadoMedico estadoMedico = new EstadoMedico();
                         obj.setEstadoMedico(estadoMedico);
@@ -100,7 +104,7 @@ public class Triaje extends AppCompatActivity  {
                         if((sintomas)){
                             obj.getEstadoMedico().setId(2);
                         }
-                        actualizarReporteMedico(objLecturaGLobal.getId(),obj);
+                        actualizarReporteMedico(objLecturaGLobal.getReporteMedico().getId(),obj);
 
                         Intent intent = new Intent(getApplicationContext(), Menu.class);
                         startActivity(intent);
@@ -220,10 +224,10 @@ public class Triaje extends AppCompatActivity  {
 
     private void actualizarReporteMedico(Long id, ReporteMedico obj){
 
-        //se actualiza los campos necesarios
-        /*ClaseGlobal objGlobal = (ClaseGlobal) getApplicationContext();
-        obj.setReporteMedico(objGlobal.getReporteMedico());
-        obj.getUsuarioCasos().setReporteMedico(obj);*/
+        //se actualiza los campos necesarios en la clase global
+        ClaseGlobal objGlobal = (ClaseGlobal) getApplicationContext();
+        objGlobal.setReporteMedico(obj);
+        //objGlobal.getUsuarioCasos().setReporteMedico(obj);
 
 
         Log.i(TAG, "valor  de id de reporte Médico actualizado: " +  obj.getId());
@@ -257,7 +261,41 @@ public class Triaje extends AppCompatActivity  {
         });
     }
 
+    private void cargarUsuarioGlobal(){
+        ClaseGlobal obj = (ClaseGlobal) getApplicationContext();
+        UsuarioCasos usuarioGlobal =  obj.getUsuarioCasos();
 
+        usuarioGlobal.setId(obj.getId());
+        usuarioGlobal.setNombre(obj.getNombre());
+        usuarioGlobal.setApellido(obj.getApellido());
+        usuarioGlobal.setNacionalidad(obj.getNacionalidad());
+        usuarioGlobal.setTipoDocumento(obj.getTipoDocumento());
+        usuarioGlobal.setNumeroDocumento(obj.getNumeroDocumento());
+        usuarioGlobal.setNacimiento(obj.getNacimiento());
+        usuarioGlobal.setDistrito(obj.getDistrito());
+        usuarioGlobal.setTelefono(obj.getTelefono());
+        usuarioGlobal.setDireccionDomicilio(obj.getDireccionDomicilio());
+        usuarioGlobal.setCodigoConfirmacion(obj.getCodigoConfirmacion());
+        usuarioGlobal.setCondicionUso(obj.getCondicionUso());
+        usuarioGlobal.setFechaRegistro(obj.getFechaRegistro());
+        usuarioGlobal.setGps(obj.getGps());
+        usuarioGlobal.setTipoUsuario(obj.getTipoUsuario());
+        usuarioGlobal.setReporteEconomico(obj.getReporteEconomico());
+        usuarioGlobal.setReporteMedico(obj.getReporteMedico());
+        usuarioGlobal.setEstado(obj.getEstado());
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
+
+        return false;
+    }
 
 
 }

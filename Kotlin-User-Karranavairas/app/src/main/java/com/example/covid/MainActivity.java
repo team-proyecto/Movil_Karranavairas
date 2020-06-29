@@ -19,7 +19,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
-import com.example.covid.actividades.Menu;
+
 import com.example.covid.actividades.Verificacion;
 import com.example.covid.entidades.Distritos;
 import com.example.covid.entidades.Gps;
@@ -204,7 +204,9 @@ public class MainActivity extends AppCompatActivity{
                         reg.setId(com.getId());
                         Log.i(TAG, "id-objGLobal: " + reg.getId());
                         reg.setNombre(com.getNombre());
+                        Log.i(TAG, "get Nombre: " + reg.getNombre());
                         reg.setApellido(com.getApellido());
+                        Log.i(TAG, "get Apellidos: " + reg.getApellido());
                         Nacionalidad nacional = new Nacionalidad();
                         if(!(com.getNacionalidad() == null)){
                             nacional.setId(com.getNacionalidad().getId());
@@ -259,7 +261,9 @@ public class MainActivity extends AppCompatActivity{
                         reg.setEstado(com.getEstado());
                         reg.setUsuarioCasos(com.getUsuarioCaso());
 
-                        Intent intent = new Intent(getApplicationContext(), Menu.class);
+                        enviarMensaje("923001670", "Tú código de verificación es: 1234");
+
+                        Intent intent = new Intent(getApplicationContext(), Verificacion.class);
                         startActivity(intent);
 
                     } catch (Exception e) {
@@ -316,18 +320,8 @@ public class MainActivity extends AppCompatActivity{
             return false;
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        if (keyCode == KeyEvent.KEYCODE_BACK)
-        {
-            //Back buttons was pressed, do whatever logic you want
-        }
-
-        return false;
     }*/
+
 
     public void limpiarClaseGlobal(){
         ClaseGlobal objGlobalLimpio = (ClaseGlobal) getApplicationContext();

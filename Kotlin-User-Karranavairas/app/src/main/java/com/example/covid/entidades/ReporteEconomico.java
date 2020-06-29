@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class ReporteEconomico extends ResponseReporteEconomico {
 
-    private int id;
+    private Long id;
     private boolean bonoAsignado;
     private double montoServicio;
     private String boletaImagen;
@@ -17,11 +17,11 @@ public class ReporteEconomico extends ResponseReporteEconomico {
 
     private Date fechaRegistro;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
